@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'affiche',
+    'places.apps.PlacesConfig'
 ]
 
 MIDDLEWARE = [
