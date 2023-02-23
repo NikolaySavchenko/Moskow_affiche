@@ -1,6 +1,6 @@
 from django.db import models
 
-class Place(models.Model):
+class Places(models.Model):
     title = models.CharField(max_length=200)
     description_short = models.CharField(max_length=500)
     description_long = models.CharField(max_length=10000)
@@ -9,3 +9,8 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Images(models.Model):
+    place = models.ForeignKey(Places, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/')
