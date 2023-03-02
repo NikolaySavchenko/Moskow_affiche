@@ -1,5 +1,6 @@
 from django.shortcuts import render
-import json
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 from .models import *
 
 
@@ -31,10 +32,30 @@ def index(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.title,
-                "detailsUrl": json.dumps(place_context)
+                "detailsUrl": "./places/moscow_legends.json" # json.dumps(place_context)
             }
         }
 
         context_final['places']['features'].append(place_geojson)
 
     return render(request, 'index.html', context=context_final)
+
+
+def places(request, id):
+    place = get_object_or_404(Places, id=id)
+    images = Images.objects.filter(place_id=id)
+
+    place_context = {
+        "title": place.title,
+        "imgs": [image.image.url for image in images],
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lng": place.longitude,
+            "lat": place.latitude,
+        }
+    }
+
+    return JsonResponse({'content': place_context},
+                        json_dumps_params={'ensure_ascii': False, 'indent': 2})
+
