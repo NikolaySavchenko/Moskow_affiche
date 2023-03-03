@@ -1,3 +1,5 @@
+from enum import unique
+
 from django.db import models
 
 class Places(models.Model):
@@ -14,3 +16,4 @@ class Places(models.Model):
 class Images(models.Model):
     place = models.ForeignKey(Places, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='media/')
+    position = models.PositiveIntegerField('Позиция к показу', blank=True, null=True)

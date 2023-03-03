@@ -33,7 +33,7 @@ def index(request):
 
 def place_content(request, id):
     place = get_object_or_404(Places, id=id)
-    images = Images.objects.filter(place_id=id)
+    images = Images.objects.filter(place_id=id).order_by('position')
 
     place_context = {
         "title": place.title,
