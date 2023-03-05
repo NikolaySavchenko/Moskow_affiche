@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'adminsortable2',
+    'tinymce',
     'affiche',
     'places.apps.PlacesConfig'
 ]
