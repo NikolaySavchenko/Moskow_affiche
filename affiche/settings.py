@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'adminsortable2',
     'affiche',
     'places.apps.PlacesConfig'
 ]
