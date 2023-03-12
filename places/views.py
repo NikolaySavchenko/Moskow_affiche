@@ -13,20 +13,22 @@ def index(request):
                    'features': []}
     }
     for place in places:
-        place_geojson = {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [place.longitude, place.latitude]
-            },
-            "properties": {
-                "title": place.title,
-                "placeId": place.title,
-                "detailsUrl": reverse(place_content, args=str(place.id))
+        try:
+            place_geojson = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.longitude, place.latitude]
+                },
+                "properties": {
+                    "title": place.title,
+                    "placeId": place.title,
+                    "detailsUrl": reverse(place_content, args=str(place.id))
+                }
             }
-        }
-
-        context_final['places']['features'].append(place_geojson)
+            context_final['places']['features'].append(place_geojson)
+        except:
+            continue
 
     return render(request, 'index.html', context=context_final)
 
