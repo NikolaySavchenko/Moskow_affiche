@@ -16,14 +16,14 @@ pip install -r requirements.txt
 
 Создайте базу данных SQLite
 
-```sh
-python3 manage.py migrate
+```
+python manage.py migrate
 ```
 
 Запустите разработческий сервер
 
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 ## Переменные окружения
@@ -34,6 +34,26 @@ python3 manage.py runserver
 - `DEBUG` — дебаг-режим. Поставьте `True`, чтобы увидеть отладочную информацию в случае ошибки.
 - `SECRET_KEY` — секретный ключ проекта
 - `ALLOWED_HOSTS` — см [документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
+
+## Для добавления новых мест в Базу Данных запустите команду:
+```
+python manage.py load_place URL
+```
+Где `URL` - ссылка на JSON файл с описанием места, в формате:
+```
+{
+    "title": "Название точки",
+    "imgs": [
+        ссылки на картинки
+],
+    "description_short": "Описание короткое",
+    "description_long": "Описание полное",
+    "coordinates": {
+        "lng": Долгота,
+        "lat": Широта
+    }
+}
+```
 
 ## Цели проекта
 
