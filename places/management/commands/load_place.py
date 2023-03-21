@@ -37,7 +37,7 @@ class Command(BaseCommand):
 
         for num, img in enumerate(response.json()['imgs']):
             pict = request.urlopen(img).read()
-            out = open(f'media/media/{title}_{num}.jpg', "wb")
+            out = open(f'media/media/{title}_{num}.jpg', 'wb')
             out.write(pict)
             out.close
 

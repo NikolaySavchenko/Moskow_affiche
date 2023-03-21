@@ -10,22 +10,22 @@ def index(request):
 
     context_final = {
         'places': {
-            "type": 'FeatureCollection',
+            'type': 'FeatureCollection',
             'features': []
         }
     }
     for place in places:
         try:
             place_geojson = {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.longitude, place.latitude]
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [place.longitude, place.latitude]
                 },
-                "properties": {
-                    "title": place.title,
-                    "placeId": place.title,
-                    "detailsUrl": reverse(place_content, args=str(place.id))
+                'properties': {
+                    'title': place.title,
+                    'placeId': place.title,
+                    'detailsUrl': reverse(place_content, args=str(place.id))
                 }
             }
             context_final['places']['features'].append(place_geojson)
@@ -40,13 +40,13 @@ def place_content(request, id):
     images = Images.objects.filter(place_id=id)
 
     place_context = {
-        "title": place.title,
-        "imgs": [image.image.url for image in images],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
-        "coordinates": {
-            "lng": place.longitude,
-            "lat": place.latitude,
+        'title': place.title,
+        'imgs': [image.image.url for image in images],
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'coordinates': {
+            'lng': place.longitude,
+            'lat': place.latitude,
         }
     }
 
