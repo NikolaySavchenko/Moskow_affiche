@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from adminsortable2.admin import SortableStackedInline
 from adminsortable2.admin import SortableAdminBase
 
-from .models import *
+from .models import Places, Images
 
 
 class ImagesStackedInline(SortableStackedInline):

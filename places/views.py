@@ -2,15 +2,17 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.urls import reverse
-from .models import *
+from .models import Places, Images
 
 
 def index(request):
     places = Places.objects.all()
 
     context_final = {
-        'places': {"type": 'FeatureCollection',
-                   'features': []}
+        'places': {
+            "type": 'FeatureCollection',
+            'features': []
+        }
     }
     for place in places:
         try:
@@ -48,5 +50,7 @@ def place_content(request, id):
         }
     }
 
-    return JsonResponse(place_context,
-                        json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(
+        place_context,
+        json_dumps_params={'ensure_ascii': False, 'indent': 2}
+    )

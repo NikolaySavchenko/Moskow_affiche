@@ -3,7 +3,7 @@ from urllib import parse, request
 import requests
 from django.core.management.base import BaseCommand
 
-from places.models import *
+from places.models import Places, Images
 
 
 class Command(BaseCommand):
