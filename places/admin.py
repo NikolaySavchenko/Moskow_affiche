@@ -14,7 +14,7 @@ class ImagesStackedInline(SortableStackedInline):
         return mark_safe('<img src="{url}" height={height} />'.format(
             url=obj.image.url,
             height=200,
-           )
+        )
         )
 
     fields = ('image', 'preview_image', 'position')

@@ -26,11 +26,11 @@ class Command(BaseCommand):
         response.raise_for_status()
 
         Places.objects.get_or_create(
-            title = response.json()['title'],
-            description_short = response.json()['description_short'],
-            description_long = response.json()['description_long'],
-            longitude = response.json()['coordinates']['lng'],
-            latitude = response.json()['coordinates']['lat'],
+            title=response.json()['title'],
+            description_short=response.json()['description_short'],
+            description_long=response.json()['description_long'],
+            longitude=response.json()['coordinates']['lng'],
+            latitude=response.json()['coordinates']['lat'],
         )
         title = response.json()['title']
         place = Places.objects.get(title=title)
@@ -42,9 +42,7 @@ class Command(BaseCommand):
             out.close
 
             Images.objects.get_or_create(
-                place = place,
-                image = f'media/{title}_{num}.jpg',
-                position = num
+                place=place,
+                image=f'media/{title}_{num}.jpg',
+                position=num
             )
-
-
