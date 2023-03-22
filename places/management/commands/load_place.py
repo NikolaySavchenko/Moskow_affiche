@@ -24,6 +24,11 @@ class Command(BaseCommand):
 
         response = requests.get(url_rez)
         response.raise_for_status()
+        place = Places.objects.filter(longitude=response.json()['coordinates']['lng'],
+                                      latitude=response.json()['coordinates']['lat'])
+        if place:
+            print(f"Данная точка: {response.json()['title']}, уже отмечена на карте")
+            exit()
 
         Places.objects.get_or_create(
             title=response.json()['title'],
