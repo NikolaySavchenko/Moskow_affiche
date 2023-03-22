@@ -4,7 +4,7 @@ media/
 .env
 venv/
 __pycache__/
-affiche/static/.gitbook/
-affiche/static/.editorconfig
+/affiche/static/.gitbook/
+/affiche/static/.editorconfig
 
 
