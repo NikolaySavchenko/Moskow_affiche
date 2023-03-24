@@ -8,7 +8,7 @@ from .models import Places, Images
 def index(request):
     places = Places.objects.all()
 
-    context_final = {
+    final_context = {
         'places': {
             'type': 'FeatureCollection',
             'features': []
@@ -28,11 +28,11 @@ def index(request):
                     'detailsUrl': reverse(place_content, args=str(place.id))
                 }
             }
-            context_final['places']['features'].append(place_geojson)
+            final_context['places']['features'].append(place_geojson)
         except:
             continue
 
-    return render(request, 'index.html', context=context_final)
+    return render(request, 'index.html', context=final_context)
 
 
 def place_content(request, id):
