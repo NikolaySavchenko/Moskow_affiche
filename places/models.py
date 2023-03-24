@@ -20,5 +20,8 @@ class Images(models.Model):
     position = models.PositiveIntegerField('Позиция к показу', default=99,
                                            blank=True, null=True)
 
+    def __str__(self):
+        return self.place.title
+
     class Meta:
         ordering = ['position']
