@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from adminsortable2.admin import SortableStackedInline
 from adminsortable2.admin import SortableAdminBase
@@ -11,10 +12,10 @@ class ImagesStackedInline(SortableStackedInline):
     readonly_fields = ['preview_image']
 
     def preview_image(self, obj):
-        return mark_safe('<img src="{url}" height={height} />'.format(
+        return format_html(
+            mark_safe('<img src="{url}" height={height} />'),
             url=obj.image.url,
             height=200,
-        )
         )
 
     fields = ('image', 'preview_image', 'position')
