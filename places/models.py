@@ -6,8 +6,8 @@ class Places(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description_short = models.TextField('Краткое описание', blank=True)
     description_long = HTMLField('Описание точки', blank=True)
-    longitude = models.FloatField('Долгота:')
-    latitude = models.FloatField('Широта:')
+    longitude = models.FloatField('Долгота')
+    latitude = models.FloatField('Широта')
 
     def __str__(self):
         return self.title
@@ -27,8 +27,8 @@ class Images(models.Model):
         null=True
     )
 
-    def __str__(self):
-        return self.place.title
-
     class Meta:
         ordering = ['position']
+
+    def __str__(self):
+        return self.place.title
