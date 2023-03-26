@@ -24,7 +24,8 @@ def index(request):
             'properties': {
                 'title': place.title,
                 'placeId': place.id,
-                'detailsUrl': reverse(place_content, kwargs={'id': str(place.id)})
+                'detailsUrl': reverse(place_content,
+                                      kwargs={'id': str(place.id)})
             }
         }
         final_context['places']['features'].append(place_geojson)
