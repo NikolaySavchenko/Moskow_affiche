@@ -37,7 +37,7 @@ def index(request):
 
 def place_content(request, id):
     place = get_object_or_404(Places, id=id)
-    images = Images.objects.filter(place_id=id)
+    images = place.images.all()
 
     place_context = {
         'title': place.title,
