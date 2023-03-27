@@ -4,6 +4,8 @@ from django.utils.safestring import mark_safe
 from adminsortable2.admin import SortableStackedInline
 from adminsortable2.admin import SortableAdminBase
 
+from .secondary_tools import preview_image
+
 from .models import Places, Images
 
 
@@ -11,10 +13,10 @@ class ImagesStackedInline(SortableStackedInline):
     model = Images
     readonly_fields = ['preview_image']
 
-    def preview_image(self, obj):
+    def preview_image(self, picture):
         return format_html(
             mark_safe('<img src="{url}" height={height} />'),
-            url=obj.image.url,
+            url=picture.image.url,
             height=200,
         )
 
@@ -30,9 +32,9 @@ class SortablePlacesAdmin(SortableAdminBase, admin.ModelAdmin):
 class ImagesAdmin(admin.ModelAdmin):
     readonly_fields = ['preview_image']
 
-    def preview_image(self, obj):
-        return mark_safe('<img src="{url}" height={height} />'.format(
-            url=obj.image.url,
+    def preview_image(self, picture):
+        return format_html(
+            mark_safe('<img src="{url}" height={height} />'),
+            url=picture.image.url,
             height=200,
-        )
         )
