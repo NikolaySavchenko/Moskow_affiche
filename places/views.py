@@ -20,7 +20,7 @@ def index(request):
                 'title': place.title,
                 'placeId': place.id,
                 'detailsUrl': reverse(place_content,
-                                      kwargs={'id': str(place.id)})
+                                      kwargs={'id': place.id})
             }
         }
         features.append(point)
