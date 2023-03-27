@@ -10,7 +10,7 @@ def index(request):
     features = []
 
     for place in places:
-        place_geojson = {
+        point = {
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
@@ -23,8 +23,8 @@ def index(request):
                                       kwargs={'id': str(place.id)})
             }
         }
-        features.append(place_geojson)
-        
+        features.append(point)
+
     final_context = {
         'places': {
             'type': 'FeatureCollection',
