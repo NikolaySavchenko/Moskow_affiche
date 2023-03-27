@@ -7,13 +7,8 @@ from .models import Places, Images
 
 def index(request):
     places = Places.objects.all()
+    features = []
 
-    final_context = {
-        'places': {
-            'type': 'FeatureCollection',
-            'features': []
-        }
-    }
     for place in places:
         place_geojson = {
             'type': 'Feature',
@@ -28,7 +23,14 @@ def index(request):
                                       kwargs={'id': str(place.id)})
             }
         }
-        final_context['places']['features'].append(place_geojson)
+        features.append(place_geojson)
+        
+    final_context = {
+        'places': {
+            'type': 'FeatureCollection',
+            'features': features
+        }
+    }
 
     return render(request, 'index.html', context=final_context)
 
