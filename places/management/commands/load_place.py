@@ -2,6 +2,7 @@ from urllib import parse, request
 
 import requests
 from django.core.management.base import BaseCommand
+from django.core.files.base import ContentFile
 
 from places.models import Places, Images
 
@@ -32,24 +33,22 @@ class Command(BaseCommand):
             print(f"Данная точка: {response.json()['title']}, уже отмечена на карте")
             exit()
 
+        title = response.json()['title']
+
         Places.objects.get_or_create(
-            title=response.json()['title'],
+            title=title,
             description_short=response.json()['description_short'],
             description_long=response.json()['description_long'],
             longitude=response.json()['coordinates']['lng'],
             latitude=response.json()['coordinates']['lat'],
         )
-        title = response.json()['title']
+
         place = Places.objects.get(title=title)
 
         for num, img in enumerate(response.json()['imgs']):
-            pict = request.urlopen(img).read()
-            out = open(f'media/media/{place.id}_{num}.jpg', 'wb')
-            out.write(pict)
-            out.close
-
+            pict = request.urlopen(img)
             Images.objects.get_or_create(
                 place=place,
-                image=f'media/{title}_{num}.jpg',
+                image=ContentFile(pict.read(), name=f'{place.id}_{num}.jpg'),
                 position=num
             )
