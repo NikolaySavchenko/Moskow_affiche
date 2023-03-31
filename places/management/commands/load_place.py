@@ -26,11 +26,11 @@ class Command(BaseCommand):
         response = requests.get(url_rez)
         response.raise_for_status()
         place_specification = response.json()
-        place = Places.objects.filter(
+        same_places = Places.objects.filter(
             longitude=place_specification['coordinates']['lng'],
             latitude=place_specification['coordinates']['lat'],
         )
-        if place:
+        if same_places:
             print(f"Данная точка: {place_specification['title']}, уже отмечена на карте")
             exit()
 
