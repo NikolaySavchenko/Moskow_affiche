@@ -21,7 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         url, *__ = kwargs['url']
         url_parse = parse.urlsplit(url)
-        url_rez = f'{url_parse.scheme}://{url_parse.netloc}{url_parse.path}'
+        url_rez = f'{url_parse.scheme}://{url_parse.netloc}{url_parse.path}{url_parse.query}{url_parse.fragment}'
 
         response = requests.get(url_rez)
         response.raise_for_status()
