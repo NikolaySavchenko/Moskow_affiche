@@ -25,27 +25,28 @@ class Command(BaseCommand):
 
         response = requests.get(url_rez)
         response.raise_for_status()
+        place_specification = response.json()
         place = Places.objects.filter(
-            longitude=response.json()['coordinates']['lng'],
-            latitude=response.json()['coordinates']['lat'],
+            longitude=place_specification['coordinates']['lng'],
+            latitude=place_specification['coordinates']['lat'],
         )
         if place:
-            print(f"Данная точка: {response.json()['title']}, уже отмечена на карте")
+            print(f"Данная точка: {place_specification['title']}, уже отмечена на карте")
             exit()
 
-        title = response.json()['title']
+        title = place_specification['title']
 
         Places.objects.get_or_create(
             title=title,
-            description_short=response.json()['description_short'],
-            description_long=response.json()['description_long'],
-            longitude=response.json()['coordinates']['lng'],
-            latitude=response.json()['coordinates']['lat'],
+            description_short=place_specification['description_short'],
+            description_long=place_specification['description_long'],
+            longitude=place_specification['coordinates']['lng'],
+            latitude=place_specification['coordinates']['lat'],
         )
 
         place = Places.objects.get(title=title)
 
-        for num, img in enumerate(response.json()['imgs']):
+        for num, img in enumerate(place_specification['imgs']):
             pict = request.urlopen(img)
             Images.objects.get_or_create(
                 place=place,
