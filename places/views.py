@@ -21,7 +21,7 @@ def index(request):
                 'placeId': place.id,
                 'detailsUrl': reverse(
                     place_content,
-                    kwargs={'id': place.id}
+                    kwargs={'place_id': place.id, }
                 )
             }
         }
@@ -37,8 +37,8 @@ def index(request):
     return render(request, 'index.html', context=final_context)
 
 
-def place_content(request, id):
-    place = get_object_or_404(Places, id=id)
+def place_content(request, place_id):
+    place = get_object_or_404(Places, id=place_id)
     images = place.images.all()
 
     place_context = {

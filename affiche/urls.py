@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('places/<int:id>', views.place_content,
+                  path('places/<int:place_id>', views.place_content,
                        name='place_content'),
                   path('tinymce/', include('tinymce.urls')),
                   path('', views.index),
