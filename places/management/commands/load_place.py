@@ -19,7 +19,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
-        url = kwargs['url'][0]
+        url, *__ = kwargs['url']
         url_parse = parse.urlsplit(url)
         url_rez = f'{url_parse.scheme}://{url_parse.netloc}{url_parse.path}'
 
