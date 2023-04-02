@@ -36,19 +36,17 @@ class Command(BaseCommand):
 
         title = place_specification['title']
 
-        Places.objects.update_or_create(
+        place, __ = Places.objects.update_or_create(
             title=title, defaults={
                 'title': title,
-                'description_short': place_specification['description_short'],
-                'description_long': place_specification['description_long'],
+                'description_short': place_specification.get('description_short', ''),
+                'description_long': place_specification.get('description_long', ''),
                 'longitude': place_specification['coordinates']['lng'],
                 'latitude': place_specification['coordinates']['lat'],
             }
         )
 
-        place = Places.objects.get(title=title)
-
-        for num, img in enumerate(place_specification['imgs']):
+        for num, img in enumerate(place_specification.get('imgs', [])):
             pict = request.urlopen(img)
             Images.objects.get_or_create(
                 place=place,
