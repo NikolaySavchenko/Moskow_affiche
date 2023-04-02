@@ -36,12 +36,14 @@ class Command(BaseCommand):
 
         title = place_specification['title']
 
-        Places.objects.get_or_create(
-            title=title,
-            description_short=place_specification['description_short'],
-            description_long=place_specification['description_long'],
-            longitude=place_specification['coordinates']['lng'],
-            latitude=place_specification['coordinates']['lat'],
+        Places.objects.update_or_create(
+            title=title, defaults={
+                'title': title,
+                'description_short': place_specification['description_short'],
+                'description_long': place_specification['description_long'],
+                'longitude': place_specification['coordinates']['lng'],
+                'latitude': place_specification['coordinates']['lat'],
+            }
         )
 
         place = Places.objects.get(title=title)
