@@ -21,7 +21,7 @@ def index(request):
                 'placeId': place.id,
                 'detailsUrl': reverse(
                     place_content,
-                    kwargs={'place_id': place.id, }
+                    kwargs={'place_id': place.id}
                 )
             }
         }
