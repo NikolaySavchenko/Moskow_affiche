@@ -14,16 +14,15 @@ class Command(BaseCommand):
         parser.add_argument(
             'url',
             type=str,
-            nargs=1,
             help='Enter the URL of the json with a description of the point'
         )
 
     def handle(self, *args, **kwargs):
         url = kwargs['url']
-        url_parse = parse.urlsplit(*url)
-        url_rezult = f'{url_parse.scheme}://{url_parse.netloc}{url_parse.path}{url_parse.query}{url_parse.fragment}'
+        url_parse = parse.urlsplit(url)
+        url_result = f'{url_parse.scheme}://{url_parse.netloc}{url_parse.path}{url_parse.query}{url_parse.fragment}'
 
-        response = requests.get(url_rezult)
+        response = requests.get(url_result)
         response.raise_for_status()
         place_specification = response.json()
         same_places = Places.objects.filter(
